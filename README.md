@@ -1,27 +1,32 @@
 <div align="center">
 
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=AcademiX&fontSize=80&fontAlignY=35&desc=Next-Generation%20Educational%20Intelligence&descAlignY=60&descAlign=50" alt="AcademiX Header Badge" width="100%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=280&section=header&text=AcademiX&fontSize=90&fontAlignY=35&desc=Next-Generation%20Educational%20Intelligence&descAlignY=60&descAlign=50&animation=twinkling" alt="AcademiX Header Badge" width="100%" />
+
+  <br><br>
+  
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=22&pause=1000&color=3B82F6&center=true&vCenter=true&width=435&lines=Transforming+Educational+Data;Predictive+Academic+Analytics;Zero-Code+Administration+Portal" alt="Typing SVG" /></a>
 
   <p align="center">
-    <a href="#-executive-summary">Vision</a> •
-    <a href="#-platform-showcase">Showcase</a> •
-    <a href="#-key-features--capabilities">Features</a> •
-    <a href="#%EF%B8%8F-architecture--tech-stack">Tech Stack</a> •
-    <a href="#-rapid-deployment--quick-start">Deployment</a> •
-    <a href="#-authority--visionary">Contact</a>
+    <a href="#-executive-summary"><b>Vision</b></a> •
+    <a href="#-platform-showcase"><b>Showcase</b></a> •
+    <a href="#-key-features--capabilities"><b>Features</b></a> •
+    <a href="#-architecture--tech-stack"><b>Tech Stack</b></a> •
+    <a href="#-rapid-deployment--quick-start"><b>Deployment</b></a> •
+    <a href="#-authority--visionary"><b>Contact</b></a>
   </p>
 
   <p align="center">
-    <img src="https://img.shields.io/badge/Status-Active_Deploy-success?style=for-the-badge&logo=opsgenie&logoColor=white" alt="Status" />
-    <img src="https://img.shields.io/badge/Version-2.0.0_Enterprise-007EC6?style=for-the-badge&logo=git&logoColor=white" alt="Version" />
-    <img src="https://img.shields.io/badge/Python-3.9+-4B8BBE?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-    <img src="https://img.shields.io/badge/Streamlit-Native-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit" />
-    <img src="https://img.shields.io/badge/SQLite-Integrated-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite Database" />
-    <img src="https://img.shields.io/badge/License-MIT-029A6C?style=for-the-badge&logo=open-source-initiative&logoColor=white" alt="MIT License" />
+    <img src="https://img.shields.io/badge/Status-Active_Deploy-success?style=for-the-badge&logo=opsgenie&logoColor=white" alt="Status" style="margin: 2px;" />
+    <img src="https://img.shields.io/badge/Version-2.0.0_Enterprise-007EC6?style=for-the-badge&logo=git&logoColor=white" alt="Version" style="margin: 2px;" />
+    <img src="https://img.shields.io/badge/Python-3.9+-4B8BBE?style=for-the-badge&logo=python&logoColor=white" alt="Python" style="margin: 2px;" />
+    <br>
+    <img src="https://img.shields.io/badge/Streamlit-Native-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit" style="margin: 2px;" />
+    <img src="https://img.shields.io/badge/SQLite-Integrated-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite Database" style="margin: 2px;" />
+    <img src="https://img.shields.io/badge/License-MIT-029A6C?style=for-the-badge&logo=open-source-initiative&logoColor=white" alt="MIT License" style="margin: 2px;" />
   </p>
 
   <a href="https://student-academic-analytics-platform.streamlit.app/" target="_blank">
-    <img src="https://img.shields.io/badge/🔴_Watch_Live_Demo-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live Demo" />
+    <img src="https://img.shields.io/badge/🔴_Watch_Live_Demo-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live Demo" style="box-shadow: 0 4px 14px rgba(255, 75, 75, 0.4); border-radius: 4px;" />
   </a>
 </div>
 
@@ -206,6 +211,12 @@ streamlit run app.py
 Designed, engineered, and maintained by:
 
 <div align="center">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=sathishr-ai&repo=student-academic-analytics-platform&theme=radical" alt="GitHub Stats" />
+</div>
+
+<br>
+
+<div align="center">
   <img src="https://img.shields.io/badge/Engineered_By-Sathish_R-1E293B?style=for-the-badge&labelColor=0F172A&color=4ade80" alt="Author" style="box-shadow: 0 4px 10px rgba(0,0,0,0.5);"/>
   <p><h2 style="margin-bottom: 0;">Software Engineer & AI Architect</h2></p>
   <p><i>Building High-Performance, Intelligent Systems with Uncompromising Design and Flawless Execution.</i></p>
@@ -213,13 +224,13 @@ Designed, engineered, and maintained by:
   <br>
 
   <a href="mailto:sathxsh57@gmail.com">
-    <img src="https://img.shields.io/badge/Email_Me-sathxsh57@gmail.com-1E293B?style=for-the-badge&logo=gmail&logoColor=EA4335&labelColor=0F172A" alt="Email" style="margin: 5px;"/>
+    <img src="https://img.shields.io/badge/Email_Me-sathxsh57@gmail.com-1E293B?style=for-the-badge&logo=gmail&logoColor=EA4335&labelColor=0F172A" alt="Email" style="margin: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s;"/>
   </a>
   <a href="https://github.com/sathishr-ai">
-    <img src="https://img.shields.io/badge/Follow_on_GitHub-sathishr--ai-1E293B?style=for-the-badge&logo=github&logoColor=white&labelColor=0F172A" alt="GitHub" style="margin: 5px;"/>
+    <img src="https://img.shields.io/badge/Follow_on_GitHub-sathishr--ai-1E293B?style=for-the-badge&logo=github&logoColor=white&labelColor=0F172A" alt="GitHub" style="margin: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s;"/>
   </a>
   <a href="https://www.linkedin.com/in/sathish-r-2393412a5">
-    <img src="https://img.shields.io/badge/Connect_on_LinkedIn-Sathish_R-1E293B?style=for-the-badge&logo=linkedin&logoColor=0A66C2&labelColor=0F172A" alt="LinkedIn" style="margin: 5px;"/>
+    <img src="https://img.shields.io/badge/Connect_on_LinkedIn-Sathish_R-1E293B?style=for-the-badge&logo=linkedin&logoColor=0A66C2&labelColor=0F172A" alt="LinkedIn" style="margin: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s;"/>
   </a>
 </div>
 
@@ -228,6 +239,7 @@ Designed, engineered, and maintained by:
 ---
 
 <div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer" width="100%"/>
   <p><b>Student Academic Analytics Platform</b> • Open Source Enterprise Education</p>
   <p>Released under the <a href="LICENSE">MIT License</a>. Copyright © 2026 Sathish R.</p>
 </div>
