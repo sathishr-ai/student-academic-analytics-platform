@@ -969,6 +969,7 @@ def render_attendance(data):
 def render_department_overview(data):
     st.markdown('<p class="section-title">🏫 Department Overview</p>', unsafe_allow_html=True)
     st.caption("Department-level GPA, attendance, pass rate, and enrollment breakdown")
+    
     if data is None or data.empty or 'student_id' not in data.columns:
         st.warning("⚠️ No data available to display. Please go to the Welcome page and load your student records first.")
         return
@@ -1020,6 +1021,7 @@ def render_department_overview(data):
 def render_semester_report(data, system):
     st.markdown('<p class="section-title">📅 Semester Report Card</p>', unsafe_allow_html=True)
     st.caption("Per-semester academic performance for individual students")
+    
     if data is None or data.empty or 'student_id' not in data.columns:
         st.warning("⚠️ No data available to display. Please go to the Welcome page and load your student records first.")
         return
@@ -1075,6 +1077,10 @@ def render_semester_report(data, system):
 def render_batch_comparison(data):
     st.markdown('<p class="section-title">📊 Class / Batch Comparison</p>', unsafe_allow_html=True)
     st.caption("Compare two departments or two semesters side-by-side")
+
+    if data is None or data.empty or 'student_id' not in data.columns:
+        st.warning("⚠️ No data available to display. Please go to the Welcome page and load your student records first.")
+        return
 
     tab1, tab2 = st.tabs(["🏫 Compare Departments", "📅 Compare Semesters"])
 
@@ -1155,6 +1161,7 @@ def render_batch_comparison(data):
 def render_pass_fail(data):
     st.markdown('<p class="section-title">🎯 Pass / Fail Summary</p>', unsafe_allow_html=True)
     st.caption("Course-level pass/fail breakdown. Pass = GPA ≥ 2.0")
+    
     if data is None or data.empty or 'student_id' not in data.columns:
         st.warning("⚠️ No data available to display. Please go to the Welcome page and load your student records first.")
         return
@@ -1225,6 +1232,7 @@ def render_pass_fail(data):
 def render_improvement_tracking(data):
     st.markdown('<p class="section-title">🔔 Improvement Tracking</p>', unsafe_allow_html=True)
     st.caption("Students whose GPA improved or declined significantly semester-over-semester")
+    
     if data is None or data.empty or 'student_id' not in data.columns:
         st.warning("⚠️ No data available to display. Please go to the Welcome page and load your student records first.")
         return
