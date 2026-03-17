@@ -827,7 +827,11 @@ def render_landing(system):
 
 def render_at_risk(data):
     st.markdown('<p class="section-title">🚨 At-Risk Students</p>', unsafe_allow_html=True)
-    st.caption("Students flagged for low GPA (< 2.0) or low attendance (< 75%)")
+    st.markdown('<p style="color:#94A3B8; margin-bottom:1.5rem;">Students flagged for low GPA (< 2.0) or low attendance (< 75%)</p>', unsafe_allow_html=True)
+    
+    if data is None or data.empty or 'student_id' not in data.columns:
+        st.warning("⚠️ No data available. Please load student records from the Welcome page.")
+        return
 
     student_agg = data.groupby(['student_id','first_name','last_name','major']).agg(
         cgpa=('grade','mean'), attendance=('attendance','mean')
@@ -869,7 +873,11 @@ def render_at_risk(data):
 # ─── Page: Top Performers ──────────────────────────────────────────────────────
 def render_top_performers(data):
     st.markdown('<p class="section-title">🏆 Top Performers</p>', unsafe_allow_html=True)
-    st.caption("Honor Roll (GPA ≥ 3.5) and Outstanding Attendance (≥ 97%)")
+    st.markdown('<p style="color:#94A3B8; margin-bottom:1.5rem;">Students maintaining a CGPA of 3.5 or higher</p>', unsafe_allow_html=True)
+
+    if data is None or data.empty or 'student_id' not in data.columns:
+        st.warning("⚠️ No data available. Please load student records from the Welcome page.")
+        return
 
     student_agg = data.groupby(['student_id','first_name','last_name','major']).agg(
         cgpa=('grade','mean'), attendance=('attendance','mean'), credits=('credits','sum')
@@ -1693,6 +1701,10 @@ def main():
             <div class="dash-divider"></div>
         </div>
         """, unsafe_allow_html=True)
+
+        if data is None or data.empty or 'student_id' not in data.columns:
+            st.warning("⚠️ No data available to display. Please go to the Welcome page and load your student records first.")
+            return
 
         student_agg = data.groupby('student_id').agg(cgpa=('grade','mean'), attendance=('attendance','mean')).reset_index()
         at_risk_n  = ((student_agg['cgpa'] < 2.0) | (student_agg['attendance'] < 0.75)).sum()
