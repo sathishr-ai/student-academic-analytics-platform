@@ -1886,25 +1886,29 @@ def main():
 
     elif choice == "📈 Statistics":
         st.markdown('<p class="section-title">📈 Dataset Statistics</p>', unsafe_allow_html=True)
-        stats = system.dataset_statistics()
-        c1,c2,c3 = st.columns(3)
-        c1.metric("Total Records",   stats['total_records'])
-        c2.metric("Unique Students", stats['unique_students'])
-        c3.metric("Unique Courses",  stats['unique_courses'])
-        c1.metric("Year Range",  f"{stats['min_year']} – {stats['max_year']}")
-        c2.metric("Avg GPA",     f"{stats['avg_gpa']:.2f}")
-        c3.metric("Avg Attendance", f"{stats['avg_attendance']*100:.1f}%")
-        top_df = pd.DataFrame(list(stats['top_majors'].items()), columns=['Major','Count'])
-        fig = px.bar(top_df, x='Count', y='Major', orientation='h', title='Top Majors',
-                     color='Count', color_continuous_scale='Blues')
-        st.plotly_chart(transparent_layout(fig), use_container_width=True)
-        fig = px.box(data, x='major', y='grade', title='GPA Distribution by Major')
-        fig.update_xaxes(tickangle=45)
-        st.plotly_chart(transparent_layout(fig), use_container_width=True)
-        fig = px.scatter(data, x='attendance', y='grade', color='major', opacity=0.5,
-                         title='Attendance vs Grade', labels={'attendance':'Attendance','grade':'Grade'})
-        fig.update_xaxes(tickformat='.0%')
-        st.plotly_chart(transparent_layout(fig), use_container_width=True)
+        
+        if data is None or data.empty or 'student_id' not in data.columns:
+            st.warning("⚠️ No data available to display. Please go to the Welcome page and load your student records first.")
+        else:
+            stats = system.dataset_statistics()
+            c1,c2,c3 = st.columns(3)
+            c1.metric("Total Records",   stats['total_records'])
+            c2.metric("Unique Students", stats['unique_students'])
+            c3.metric("Unique Courses",  stats['unique_courses'])
+            c1.metric("Year Range",  f"{stats['min_year']} – {stats['max_year']}")
+            c2.metric("Avg GPA",     f"{stats['avg_gpa']:.2f}")
+            c3.metric("Avg Attendance", f"{stats['avg_attendance']*100:.1f}%")
+            top_df = pd.DataFrame(list(stats['top_majors'].items()), columns=['Major','Count'])
+            fig = px.bar(top_df, x='Count', y='Major', orientation='h', title='Top Majors',
+                         color='Count', color_continuous_scale='Blues')
+            st.plotly_chart(transparent_layout(fig), use_container_width=True)
+            fig = px.box(data, x='major', y='grade', title='GPA Distribution by Major')
+            fig.update_xaxes(tickangle=45)
+            st.plotly_chart(transparent_layout(fig), use_container_width=True)
+            fig = px.scatter(data, x='attendance', y='grade', color='major', opacity=0.5,
+                             title='Attendance vs Grade', labels={'attendance':'Attendance','grade':'Grade'})
+            fig.update_xaxes(tickformat='.0%')
+            st.plotly_chart(transparent_layout(fig), use_container_width=True)
 
     elif choice == "📂 Upload Data":
         st.markdown('<p class="section-title">📂 Upload Dataset</p>', unsafe_allow_html=True)
