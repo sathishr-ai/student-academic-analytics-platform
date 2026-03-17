@@ -23,6 +23,13 @@
     <img src="https://img.shields.io/badge/SQLite-Integrated-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite Database" />
     <img src="https://img.shields.io/badge/License-MIT-029A6C?style=for-the-badge&logo=open-source-initiative&logoColor=white" alt="MIT License" />
   </p>
+
+  <br>
+
+  <a href="https://share.streamlit.io/">
+    <img src="https://img.shields.io/badge/🔴_Watch_Live_Demo-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live Demo" />
+  </a>
+
 </div>
 
 ---
