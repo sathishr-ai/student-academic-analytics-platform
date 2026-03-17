@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Analytics Platform – Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ── Reset ── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --purple: #A78BFA;
+      --blue: #60A5FA;
+      --cyan: #22d3ee;
+      --green: #34D399;
+      --pink: #F472B6;
+      --bg: #070b16;
+      --panel: #0b1225;
+      --card: #0f1a30;
+      --border: rgba(255, 255, 255, 0.07);
+      --muted: #64748B;
+      --sub: #94A3B8;
+      --main: #E2E8F0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    /* ════════════════════════════════════════
+       LAYOUT – two-column split
+    ════════════════════════════════════════ */
+    .page {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* ── LEFT PANEL ─────────────────────── */
+    .left {
+      flex: 0 0 55%;
+      position: relative;
+      background: linear-gradient(145deg, #060c1a 0%, #0a1020 50%, #070e1d 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3.5rem 4rem;
+      overflow: hidden;
+    }
+
+    /* Diagonal clip right edge */
+    .left::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -1px;
+      bottom: 0;
+      width: 80px;
+      background: linear-gradient(to bottom right, transparent 50%, var(--bg) 50%);
+      pointer-events: none;
+    }
+
+    /* Background blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      width: 480px;
+      height: 480px;
+      background: var(--purple);
+      top: -18%;
+      left: -12%;
+      opacity: 0.13;
+      animation: blobDrift 9s ease-in-out infinite;
+    }
+
+    .blob-2 {
+      width: 360px;
+      height: 360px;
+      background: var(--blue);
+      bottom: -14%;
+      right: 5%;
+      opacity: 0.12;
+      animation: blobDrift 11s ease-in-out infinite reverse;
+    }
+
+    .blob-3 {
+      width: 200px;
+      height: 200px;
+      background: var(--cyan);
+      top: 55%;
+      left: 35%;
+      opacity: 0.09;
+      animation: blobDrift 7s ease-in-out infinite 2s;
+    }
+
+    @keyframes blobDrift {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(25px, -20px) scale(1.05);
+      }
+
+      66% {
+        transform: translate(-15px, 18px) scale(0.97);
+      }
+    }
+
+    /* Grid */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(167, 139, 250, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.04) 1px, transparent 1px);
+      background-size: 52px 52px;
+    }
+
+    /* Floating particles */
+    .particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: particleRise linear infinite;
+    }
+
+    @keyframes particleRise {
+      0% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.8;
+      }
+
+      90% {
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translateY(-20px) translateX(30px);
+        opacity: 0;
+      }
+    }
+
+    /* ── Logo row ── */
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2.8rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.25), rgba(96, 165, 250, 0.18));
+      border: 1px solid rgba(167, 139, 250, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 0 20px rgba(167, 139, 250, 0.25);
+      animation: iconPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(167, 139, 250, 0.25);
+      }
+
+      50% {
+        box-shadow: 0 0 32px rgba(167, 139, 250, 0.5), 0 0 50px rgba(96, 165, 250, 0.2);
+      }
+    }
+
+    .logo-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      background: linear-gradient(120deg, #E2E8F0, #A78BFA 60%, #60A5FA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Headline ── */
+    .tagline {
+      font-size: 2.7rem;
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -1.5px;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    .tagline-gradient {
+      background: linear-gradient(120deg, #E2E8F0 0%, #A78BFA 40%, #60A5FA 70%, #34D399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 400px;
+      margin-bottom: 2.8rem;
+      font-weight: 400;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    .tagline-sub strong {
+      color: var(--sub);
+      font-weight: 600;
+    }
+
+    /* ── Feature cards ── */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+
+    .feat-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 16px;
+      padding: 1.15rem 1.05rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    /* Subtle top-left shimmer on each feat card */
+    .feat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.35), transparent);
+    }
+
+    .feat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(167, 139, 250, 0.32);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(167, 139, 250, 0.1);
+    }
+
+    .feat-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .feat-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--main);
+      margin-bottom: 0.28rem;
+      letter-spacing: -0.1px;
+    }
+
+    .feat-desc {
+      font-size: 0.74rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+
+
+    /* ── RIGHT PANEL ─────────────────────── */
+    .right {
+      flex: 0 0 45%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: linear-gradient(160deg, #080f1e 0%, #060a16 100%);
+    }
+
+    /* Subtle right-side glow */
+    .right::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(167, 139, 250, 0.4), rgba(96, 165, 250, 0.3), transparent);
+    }
+
+    /* ── Auth Card wrapper: gradient border technique (no spinning) ── */
+    .auth-card-wrap {
+      position: relative;
+      border-radius: 23px;
+      padding: 1.5px;
+      /* border thickness */
+      /* Static gradient border – diagonal purple→blue→cyan */
+      background: linear-gradient(135deg,
+          rgba(167, 139, 250, 0.75) 0%,
+          rgba(96, 165, 250, 0.55) 35%,
+          rgba(34, 211, 238, 0.45) 60%,
+          rgba(167, 139, 250, 0.3) 100%);
+      /* Outer glow breathing pulse */
+      animation: cardPop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both, glowBreathe 4s ease-in-out infinite 0.7s;
+      box-shadow:
+        0 0 28px rgba(167, 139, 250, 0.22),
+        0 0 60px rgba(96, 165, 250, 0.12),
+        0 24px 64px rgba(0, 0, 0, 0.55);
+    }
+
+    @keyframes glowBreathe {
+
+      0%,
+      100% {
+        box-shadow: 0 0 28px rgba(167, 139, 250, 0.22), 0 0 60px rgba(96, 165, 250, 0.12), 0 24px 64px rgba(0, 0, 0, 0.55);
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(167, 139, 250, 0.42), 0 0 80px rgba(96, 165, 250, 0.22), 0 24px 64px rgba(0, 0, 0, 0.55);
+      }
+    }
+
+    /* ── Auth Card ── */
+    .auth-card {
+      width: 380px;
+      background: linear-gradient(160deg, rgba(11, 19, 38, 0.97) 0%, rgba(8, 13, 28, 0.99) 100%);
+      backdrop-filter: blur(28px);
+      border-radius: 22px;
+      /* slightly less than wrap = border shows */
+      padding: 2.4rem 2.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top shimmer line */
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.7), rgba(96, 165, 250, 0.5), transparent);
+    }
+
+    /* Bottom faint glow line */
+    .auth-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 25%;
+      right: 25%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.25), transparent);
+    }
+
+    @keyframes cardPop {
+      from {
+        opacity: 0;
+        transform: scale(0.92) translateY(22px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* ── Tabs ── */
+    .auth-tabs {
+      display: flex;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 1.8rem;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.55rem;
+      border: none;
+      border-radius: 7px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: transparent;
+      color: var(--muted);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.9), rgba(59, 130, 246, 0.85));
+      color: white;
+      box-shadow: 0 2px 10px rgba(124, 58, 237, 0.4);
+    }
+
+    /* ── Form Header ── */
+    .form-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .form-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(120deg, #E2E8F0 0%, #A78BFA 50%, #60A5FA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* ── Form Panels ── */
+    .form-panel {
+      display: none;
+    }
+
+    .form-panel.active {
+      display: block;
+    }
+
+    /* ── Fields ── */
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--sub);
+      margin-bottom: 0.38rem;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .field-wrap {
+      position: relative;
+    }
+
+    .field-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+      opacity: 0.45;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .field input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 10px;
+      padding: 0.72rem 0.9rem 0.72rem 2.5rem;
+      color: var(--main);
+      font-size: 0.88rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      outline: none;
+      transition: all 0.22s ease;
+      caret-color: var(--purple);
+    }
+
+    .field input::placeholder {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .field input:focus {
+      background: rgba(167, 139, 250, 0.07);
+      border-color: rgba(167, 139, 250, 0.5);
+      box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1), 0 0 14px rgba(167, 139, 250, 0.14);
+    }
+
+    .field input:focus~.field-icon {
+      opacity: 0.8;
+    }
+
+    .pw-eye {
+      position: absolute;
+      right: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.4;
+      font-size: 0.9rem;
+      padding: 3px;
+      transition: opacity 0.2s;
+      color: var(--sub);
+    }
+
+    .pw-eye:hover {
+      opacity: 0.9;
+    }
+
+    /* ── Row options ── */
+    .opt-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0.5rem 0 1.3rem;
+    }
+
+    .check-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .check-label input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 15px;
+      height: 15px;
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .check-label input:checked {
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      border-color: var(--purple);
+    }
+
+    .check-label input:checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 9px;
+      font-weight: 900;
+    }
+
+    .forgot {
+      font-size: 0.78rem;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .forgot:hover {
+      color: var(--purple);
+    }
+
+    /* ── Submit Button ── */
+    .btn-submit {
+      width: 100%;
+      position: relative;
+      border: none;
+      border-radius: 10px;
+      padding: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      overflow: hidden;
+      background: linear-gradient(135deg, #7C3AED, #3B82F6 55%, #2563EB);
+      box-shadow: 0 4px 18px rgba(124, 58, 237, 0.4), 0 2px 7px rgba(59, 130, 246, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-bottom: 0.8rem;
+    }
+
+    /* Shimmer */
+    .btn-submit::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-submit:hover::after {
+      left: 150%;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.5), 0 3px 12px rgba(59, 130, 246, 0.35);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .btn-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .spinner-wrap {
+      display: none;
+      position: absolute;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ring {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.25);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ── Password strength ── */
+    .strength-bar {
+      display: flex;
+      gap: 3px;
+      margin-top: 5px;
+    }
+
+    .strength-seg {
+      flex: 1;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      transition: background 0.3s;
+    }
+
+    .strength-seg.weak {
+      background: #EF4444;
+    }
+
+    .strength-seg.fair {
+      background: #F59E0B;
+    }
+
+    .strength-seg.strong {
+      background: #10B981;
+    }
+
+    .strength-label {
+      font-size: 0.67rem;
+      color: var(--muted);
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    /* ── Alerts ── */
+    .alert {
+      border-radius: 9px;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.9rem;
+      display: none;
+      align-items: center;
+      gap: 7px;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .alert.err {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.28);
+      color: #FCA5A5;
+    }
+
+    .alert.succ {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      color: #6EE7B7;
+    }
+
+    .alert.show {
+      display: flex;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20% {
+        transform: translateX(-7px);
+      }
+
+      40% {
+        transform: translateX(7px);
+      }
+
+      60% {
+        transform: translateX(-4px);
+      }
+
+      80% {
+        transform: translateX(4px);
+      }
+    }
+
+    .shake {
+      animation: shake 0.38s ease;
+    }
+
+    /* ── Footer ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .left {
+        display: none;
+      }
+
+      .right {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- ════ LEFT PANEL ════ -->
+    <div class="left">
+      <div class="grid-bg"></div>
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="particles" id="particles"></div>
+
+      <!-- Logo -->
+      <div class="logo-row">
+        <div class="logo-icon">🎓</div>
+        <span class="logo-name">Student Analytics</span>
+      </div>
+
+      <!-- Headline -->
+      <div class="tagline">
+        <span class="tagline-gradient">Analyze. Understand.<br>Improve.</span>
+      </div>
+
+      <p class="tagline-sub">
+        A <strong>complete intelligence platform</strong> for institutions —
+        track grades, attendance, at-risk students, top performers, and
+        transcripts. All in one place. No code needed.
+      </p>
+
+      <!-- Feature Cards -->
+      <div class="feat-grid">
+        <div class="feat-card">
+          <span class="feat-icon">📊</span>
+          <div class="feat-title">Live Dashboard</div>
+          <div class="feat-desc">Real-time KPIs — GPA, attendance &amp; at-risk counts at a glance.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">🚨</span>
+          <div class="feat-title">At-Risk Alerts</div>
+          <div class="feat-desc">Flag students with low GPA or poor attendance early.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">🏆</span>
+          <div class="feat-title">Top Performers</div>
+          <div class="feat-desc">Honor roll leaderboard &amp; perfect attendance recognition.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">📄</span>
+          <div class="feat-title">PDF Transcripts</div>
+          <div class="feat-desc">Letter-graded, styled PDF or CSV transcript export.</div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- ════ RIGHT PANEL ════ -->
+    <div class="right">
+      <!-- auth-card-wrap provides the static gradient border -->
+      <div class="auth-card-wrap">
+        <div class="auth-card" id="authCard">
+
+          <!-- Tabs -->
+          <div class="auth-tabs">
+            <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Sign In</button>
+            <button class="tab-btn" id="tabSignup" onclick="switchTab('signup')">Create Account</button>
+          </div>
+
+          <!-- ── LOGIN PANEL ── -->
+          <div class="form-panel active" id="panelLogin">
+            <div class="form-header">
+              <div class="form-title">Welcome Back</div>
+              <div class="form-sub">Sign in to your academic dashboard</div>
+            </div>
+
+            <div class="alert err" id="loginErr"><span>⚠️</span><span id="loginErrMsg">Invalid credentials.</span></div>
+            <div class="alert succ" id="loginOk"><span>✅</span><span>Login successful! Redirecting…</span></div>
+
+            <form id="loginForm" novalidate>
+              <div class="field">
+                <label for="lUser">Username or Email</label>
+                <div class="field-wrap">
+                  <span class="field-icon">👤</span>
+                  <input type="text" id="lUser" placeholder="Enter your username" autocomplete="username" required />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="lPass">Password</label>
+                <div class="field-wrap">
+                  <span class="field-icon">🔒</span>
+                  <input type="password" id="lPass" placeholder="Enter your password" autocomplete="current-password"
+                    required />
+                  <button type="button" class="pw-eye" onclick="togglePw('lPass',this)">👁️</button>
+                </div>
+              </div>
+
+              <div class="opt-row">
+                <label class="check-label">
+                  <input type="checkbox" id="rememberMe" /> Remember me
+                </label>
+                <a class="forgot" href="#">Forgot password?</a>
+              </div>
+
+              <button type="submit" class="btn-submit" id="loginBtn">
+                <span class="btn-inner"><span>Sign In</span><span>→</span></span>
+                <span class="spinner-wrap" id="loginSpin"><span class="ring"></span></span>
+              </button>
+            </form>
+          </div>
+
+          <!-- ── SIGNUP PANEL ── -->
+          <div class="form-panel" id="panelSignup">
+            <div class="form-header">
+              <div class="form-title">Create Account</div>
+              <div class="form-sub">Join the Student Analytics Platform</div>
+            </div>
+
+            <div class="alert err" id="signupErr"><span>⚠️</span><span id="signupErrMsg">Please fill all fields.</span>
+            </div>
+            <div class="alert succ" id="signupOk"><span>🎉</span><span>Account created! Signing you in…</span></div>
+
+            <form id="signupForm" novalidate>
+              <!-- Name row -->
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div class="field">
+                  <label for="sFirst">First Name</label>
+                  <div class="field-wrap">
+                    <span class="field-icon">👤</span>
+                    <input type="text" id="sFirst" placeholder="First name" required />
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="sLast">Last Name</label>
+                  <div class="field-wrap">
+                    <span class="field-icon">👤</span>
+                    <input type="text" id="sLast" placeholder="Last name" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="sEmail">Email Address</label>
+                <div class="field-wrap">
+                  <span class="field-icon">✉️</span>
+                  <input type="email" id="sEmail" placeholder="you@university.edu" required />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="sUser">Username</label>
+                <div class="field-wrap">
+                  <span class="field-icon">🆔</span>
+                  <input type="text" id="sUser" placeholder="Choose a username" required />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="sPass">Password</label>
+                <div class="field-wrap">
+                  <span class="field-icon">🔒</span>
+                  <input type="password" id="sPass" placeholder="Create a strong password" required
+                    oninput="checkStrength(this.value)" />
+                  <button type="button" class="pw-eye" onclick="togglePw('sPass',this)">👁️</button>
+                </div>
+                <!-- Strength bar -->
+                <div class="strength-bar">
+                  <div class="strength-seg" id="seg1"></div>
+                  <div class="strength-seg" id="seg2"></div>
+                  <div class="strength-seg" id="seg3"></div>
+                  <div class="strength-seg" id="seg4"></div>
+                </div>
+                <div class="strength-label" id="strengthLabel"></div>
+              </div>
+
+              <div class="field">
+                <label for="sConfirm">Confirm Password</label>
+                <div class="field-wrap">
+                  <span class="field-icon">🔒</span>
+                  <input type="password" id="sConfirm" placeholder="Repeat your password" required />
+                  <button type="button" class="pw-eye" onclick="togglePw('sConfirm',this)">👁️</button>
+                </div>
+              </div>
+
+              <div class="opt-row" style="margin-top:0.2rem;">
+                <label class="check-label">
+                  <input type="checkbox" id="agreeTerms" required /> I agree to the Terms &amp; Privacy Policy
+                </label>
+              </div>
+
+              <button type="submit" class="btn-submit" id="signupBtn">
+                <span class="btn-inner"><span>Create Account</span><span>✦</span></span>
+                <span class="spinner-wrap" id="signupSpin"><span class="ring"></span></span>
+              </button>
+            </form>
+          </div>
+
+        </div><!-- .auth-card -->
+      </div><!-- .auth-card-wrap -->
+    </div><!-- .right -->
+
+  </div><!-- .page -->
+
+  <script>
+    /* ── Particles ─────────────────────────────────────── */
+    (function () {
+      const c = document.getElementById('particles');
+      const colors = ['#A78BFA', '#60A5FA', '#34D399', '#22d3ee', '#F472B6'];
+      for (let i = 0; i < 28; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const sz = Math.random() * 2.5 + 1;
+        p.style.cssText = `
+        left:${Math.random() * 100}%;bottom:-8px;
+        background:${colors[i % colors.length]};
+        width:${sz}px;height:${sz}px;
+        animation-duration:${Math.random() * 14 + 9}s;
+        animation-delay:${Math.random() * 18}s;
+        opacity:0.7;
+      `;
+        c.appendChild(p);
+      }
+    })();
+
+    /* ── Tab switching ──────────────────────────────────── */
+    function switchTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('tabLogin').classList.toggle('active', isLogin);
+      document.getElementById('tabSignup').classList.toggle('active', !isLogin);
+      document.getElementById('panelLogin').classList.toggle('active', isLogin);
+      document.getElementById('panelSignup').classList.toggle('active', !isLogin);
+      // Clear alerts
+      ['loginErr', 'loginOk', 'signupErr', 'signupOk'].forEach(id => document.getElementById(id).classList.remove('show'));
+    }
+
+    /* ── Toggle password ────────────────────────────────── */
+    function togglePw(id, btn) {
+      const inp = document.getElementById(id);
+      const show = inp.type === 'password';
+      inp.type = show ? 'text' : 'password';
+      btn.textContent = show ? '🙈' : '👁️';
+    }
+
+    /* ── Password strength ──────────────────────────────── */
+    function checkStrength(val) {
+      let score = 0;
+      if (val.length >= 8) score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
+      if (/[^A-Za-z0-9]/.test(val)) score++;
+      const segs = ['seg1', 'seg2', 'seg3', 'seg4'];
+      const levels = [['', '', '', ''],
+      ['weak', '', '', ''],
+      ['fair', 'fair', '', ''],
+      ['strong', 'strong', 'strong', ''],
+      ['strong', 'strong', 'strong', 'strong']];
+      const labels = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+      segs.forEach((id, i) => {
+        const el = document.getElementById(id);
+        el.className = 'strength-seg';
+        if (levels[score][i]) el.classList.add(levels[score][i]);
+      });
+      document.getElementById('strengthLabel').textContent = val.length ? labels[score] : '';
+    }
+
+    /* ── Helpers ────────────────────────────────────────── */
+    function setLoading(btnId, spinId, on) {
+      const btn = document.getElementById(btnId);
+      const sp = document.getElementById(spinId);
+      btn.querySelector('.btn-inner').style.opacity = on ? '0' : '1';
+      sp.style.display = on ? 'flex' : 'none';
+      btn.disabled = on;
+    }
+
+    function showAlert(id, msg) {
+      const el = document.getElementById(id);
+      if (msg !== null) {
+        const msgEl = el.querySelector('span:last-child');
+        if (msgEl && msg) msgEl.textContent = msg;
+      }
+      el.classList.add('show');
+    }
+
+    function hideAlert(id) { document.getElementById(id).classList.remove('show'); }
+
+    function shakeForm(formId) {
+      const f = document.getElementById(formId);
+      f.classList.add('shake');
+      f.addEventListener('animationend', () => f.classList.remove('shake'), { once: true });
+    }
+
+    /* ── Login submit ───────────────────────────────────── */
+    const DEMO_USER = 'admin', DEMO_PASS = 'admin123';
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      hideAlert('loginErr'); hideAlert('loginOk');
+      const user = document.getElementById('lUser').value.trim();
+      const pass = document.getElementById('lPass').value;
+      if (!user) { showAlert('loginErr', 'Please enter your username or email.'); shakeForm('loginForm'); return; }
+      if (!pass) { showAlert('loginErr', 'Please enter your password.'); shakeForm('loginForm'); return; }
+      setLoading('loginBtn', 'loginSpin', true);
+      setTimeout(() => {
+        setLoading('loginBtn', 'loginSpin', false);
+        if ((user === DEMO_USER || user === 'admin@university.edu') && pass === DEMO_PASS) {
+          showAlert('loginOk', null);
+          setTimeout(() => { window.location.href = 'http://localhost:8501/?user=' + encodeURIComponent(user); }, 1500);
+        } else {
+          showAlert('loginErr', 'Invalid username or password. (Hint: admin / admin123)');
+          shakeForm('loginForm');
+        }
+      }, 1400);
+    });
+
+    /* ── Signup submit ──────────────────────────────────── */
+    // In-memory user store (persists while the page is open)
+    const users = [{ username: DEMO_USER, password: DEMO_PASS }];
+
+    document.getElementById('signupForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      hideAlert('signupErr'); hideAlert('signupOk');
+      const first = document.getElementById('sFirst').value.trim();
+      const last = document.getElementById('sLast').value.trim();
+      const email = document.getElementById('sEmail').value.trim();
+      const uname = document.getElementById('sUser').value.trim();
+      const pass = document.getElementById('sPass').value;
+      const confirm = document.getElementById('sConfirm').value;
+      const agreed = document.getElementById('agreeTerms').checked;
+
+      if (!first || !last) { showAlert('signupErr', 'Please enter your full name.'); shakeForm('signupForm'); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showAlert('signupErr', 'Please enter a valid email address.'); shakeForm('signupForm'); return; }
+      if (!uname || uname.length < 3) { showAlert('signupErr', 'Username must be at least 3 characters.'); shakeForm('signupForm'); return; }
+      if (users.some(u => u.username === uname)) { showAlert('signupErr', 'Username is already taken.'); shakeForm('signupForm'); return; }
+      if (pass.length < 8) { showAlert('signupErr', 'Password must be at least 8 characters.'); shakeForm('signupForm'); return; }
+      if (pass !== confirm) { showAlert('signupErr', 'Passwords do not match.'); shakeForm('signupForm'); return; }
+      if (!agreed) { showAlert('signupErr', 'Please agree to the Terms & Privacy Policy.'); shakeForm('signupForm'); return; }
+
+      setLoading('signupBtn', 'signupSpin', true);
+      setTimeout(() => {
+        setLoading('signupBtn', 'signupSpin', false);
+        users.push({ username: uname, password: pass, email, first, last });
+        showAlert('signupOk', null);
+        // Auto switch to login after 1.8s
+        setTimeout(() => {
+          hideAlert('signupOk');
+          switchTab('login');
+          document.getElementById('lUser').value = uname;
+        }, 1800);
+      }, 1500);
+    });
+
+    /* ── Dismiss alert on input ── */
+    ['lUser', 'lPass'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        hideAlert('loginErr');
+      });
+    });
+  </script>
+</body>
+
+</html>

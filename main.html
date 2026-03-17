@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcademiX – Student Analytics Platform</title>
+
+    <!-- Auth Gate -->
+    <script>
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ── Base Styles from app.py ── */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0a0f1e 0%, #0d1427 60%, #0a1128 100%);
+            --purple: #A78BFA;
+            --blue: #60A5FA;
+            --emerald: #34D399;
+            --text-main: #F1F5F9;
+            --text-muted: #94A3B8;
+            --panel-bg: rgba(30, 41, 59, 0.75);
+            --border: rgba(255, 255, 255, 0.07);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            background-attachment: fixed;
+        }
+
+        /* ── App Layout ── */
+        .app-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 290px;
+            background: linear-gradient(180deg, #0A0F1E 0%, #0D1427 60%, #0A1128 100%);
+            border-right: 1px solid rgba(96, 165, 250, 0.12);
+            padding: 1.5rem 0.8rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+            overflow-y: auto;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .logo-img {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-title {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-sub {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
+        }
+
+        .nav-section-label {
+            font-size: 0.68rem;
+            color: #475569;
+            font-weight: 700;
+            margin: 1.2rem 0.8rem 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-section-label::before,
+        .nav-section-label::after {
+            content: "──";
+            opacity: 0.3;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.65rem 1rem;
+            border-radius: 10px;
+            color: #94A3B8;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-bottom: 2px;
+        }
+
+        .nav-item:hover {
+            background: rgba(96, 165, 250, 0.09);
+            color: #CBD5E1;
+            transform: translateX(3px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.22), rgba(167, 139, 250, 0.08));
+            border-left: 3px solid #3B82F6;
+            color: #93C5FD;
+            font-weight: 700;
+            border-radius: 0 10px 10px 0;
+        }
+
+        /* ── Main content ── */
+        .main-content {
+            flex: 1;
+            padding: 2.5rem 4rem;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* ── Top Bar / User Badge ── */
+        .user-bar {
+            position: fixed;
+            top: 15px;
+            right: 40px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 12px 5px 8px;
+            background: rgba(9, 14, 30, 0.93);
+            backdrop-filter: blur(18px);
+            border-radius: 50px;
+            border: 1px solid rgba(167, 139, 250, 0.38);
+            box-shadow: 0 4px 22px rgba(0, 0, 0, 0.55);
+        }
+
+        .ub-av {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7C3AED, #3B82F6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .ub-info {
+            line-height: 1.1;
+        }
+
+        .ub-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #E2E8F0;
+            display: block;
+        }
+
+        .ub-role {
+            font-size: 0.6rem;
+            color: #64748B;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .ub-sep {
+            width: 1px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 0 5px;
+        }
+
+        .ub-out {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #FCA5A5;
+            background: rgba(239, 68, 68, 0.13);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 20px;
+            padding: 4px 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .ub-out:hover {
+            background: rgba(239, 68, 68, 0.26);
+            border-color: rgba(239, 68, 68, 0.5);
+        }
+
+        /* ── Hero Components from app.py ── */
+        .hero-wrap {
+            text-align: center;
+            padding: 4rem 1rem 3.5rem;
+            background: linear-gradient(160deg, rgba(10, 15, 30, 0) 0%, rgba(99, 102, 241, .07) 50%, rgba(10, 15, 30, 0) 100%);
+            border-radius: 24px;
+            border: 1px solid rgba(99, 102, 241, .14);
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(99, 102, 241, 0.13);
+            border: 1px solid rgba(99, 102, 241, 0.32);
+            color: #A5B4FC;
+            font-size: 0.73rem;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: 999px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-headline {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            background: linear-gradient(120deg, #E2E8F0 0%, #A78BFA 38%, #60A5FA 68%, #34D399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subline {
+            font-size: 1.1rem;
+            color: #64748B;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .stat-strip {
+            display: flex;
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 14px;
+            overflow: hidden;
+            margin: 3rem auto 0;
+            max-width: 900px;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(12px);
+        }
+
+        .stat-item {
+            flex: 1;
+            padding: 1.2rem 1rem;
+            border-right: 1px solid rgba(255, 255, 255, .05);
+            text-align: center;
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            font-size: 1.7rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #A78BFA, #60A5FA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.68rem;
+            color: #475569;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(96, 165, 250, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <span class="logo-img">🎓</span>
+                <span class="logo-title">AcademiX</span>
+                <span class="logo-sub">School Analytics Platform</span>
+            </div>
+
+            <nav>
+                <a href="#" class="nav-item active">🏠 Welcome</a>
+                <a href="#" class="nav-item">📊 Dashboard</a>
+
+                <div class="nav-section-label">Academic Monitoring</div>
+                <a href="#" class="nav-item">🚨 At-Risk Students</a>
+                <a href="#" class="nav-item">🏆 Top Performers</a>
+                <a href="#" class="nav-item">🔔 Improvement</a>
+
+                <div class="nav-section-label">Reports & Analysis</div>
+                <a href="#" class="nav-item">🏫 Dept Overview</a>
+                <a href="#" class="nav-item">📋 Attendance</a>
+                <a href="#" class="nav-item">🎯 Pass/Fail</a>
+                <a href="#" class="nav-item">📊 Batch Compare</a>
+
+                <div class="nav-section-label">Student Records</div>
+                <a href="#" class="nav-item">🔍 Student Search</a>
+                <a href="#" class="nav-item">📅 Semester Report</a>
+                <a href="#" class="nav-item">📄 Transcript</a>
+                <a href="#" class="nav-item">🖨 PDF Transcript</a>
+
+                <div class="nav-section-label">Data</div>
+                <a href="#" class="nav-item">📈 Statistics</a>
+                <a href="#" class="nav-item">📂 Upload Data</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- User Bar -->
+            <div class="user-bar">
+                <div class="ub-av" id="userIcon">AD</div>
+                <div class="ub-info">
+                    <span class="ub-name" id="userName">admin</span>
+                    <span class="ub-role">Administrator</span>
+                </div>
+                <div class="ub-sep"></div>
+                <button class="ub-out" onclick="logout()">Logout</button>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="hero-wrap">
+                <div class="hero-badge">✦ School & College Edition</div>
+                <div class="hero-headline">Academic Analytics<br>Made Effortless</div>
+                <div class="hero-subline">
+                    A <strong>complete intelligence platform</strong> for institutions — track grades,
+                    attendance, at-risk students, top performers, transcripts & more.
+                    All in one place. No code needed.
+                </div>
+
+                <div class="stat-strip">
+                    <div class="stat-item">
+                        <div class="stat-num">15+</div>
+                        <div class="stat-label">Analytics Pages</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">1500</div>
+                        <div class="stat-label">Demo Students</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">Live</div>
+                        <div class="stat-label">Charts & Insights</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">PDF</div>
+                        <div class="stat-label">Transcript Export</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">Zero</div>
+                        <div class="stat-label">Coding Required</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Populate User Details
+        const activeUser = localStorage.getItem('currentUser') || 'admin';
+        document.getElementById('userName').textContent = activeUser;
+        document.getElementById('userIcon').textContent = activeUser.charAt(0).toUpperCase() + (activeUser.length > 1 ? activeUser.charAt(1).toUpperCase() : '');
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('loginTime');
+            window.location.href = 'login.html';
+        }
+
+        // Sidebar Navigation Mock
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
