@@ -26,7 +26,7 @@
 
   <br>
 
-  <a href="https://share.streamlit.io/">
+  <a href="https://student-academic-analytics-platform.streamlit.app/" target="_blank">
     <img src="https://img.shields.io/badge/🔴_Watch_Live_Demo-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live Demo" />
   </a>
 
