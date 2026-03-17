@@ -7,6 +7,12 @@ class DatabaseManager:
         # Get the absolute path to the db file relative to the project root
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.db_path = os.path.join(base_dir, db_path)
+        
+        # Auto-seed the database if it doesn't exist (e.g. on Streamlit Cloud)
+        if not os.path.exists(self.db_path):
+            print(f"Database {self.db_path} missing. Running auto-seeder...")
+            from backend.seed_data import seed_database
+            seed_database()
     
     def get_connection(self):
         """Create and return a database connection."""
