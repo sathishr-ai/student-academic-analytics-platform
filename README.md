@@ -104,6 +104,46 @@
 This platform operates as a completely self-contained **Full-Stack Application**, requiring absolutely no complex server configurations or cloud databases to function. 
 
 <div align="center">
+
+```mermaid
+graph TD
+    %% Styling
+    classDef user fill:#0F172A,stroke:#3B82F6,stroke-width:2px,color:#fff
+    classDef frontend fill:#1E293B,stroke:#EF4444,stroke-width:2px,color:#fff
+    classDef backend fill:#1E293B,stroke:#10B981,stroke-width:2px,color:#fff
+    classDef database fill:#0F172A,stroke:#F59E0B,stroke-width:2px,color:#fff
+    classDef export fill:#1E293B,stroke:#8B5CF6,stroke-width:2px,color:#fff
+
+    User((👤 Admin/Staff)):::user
+
+    subgraph "Presentation Layer"
+        UI[Streamlit UI<br/>Glassmorphism Theme]:::frontend
+        Charts[Plotly & Pandas<br/>Analytics Engine]:::frontend
+    end
+
+    subgraph "Application Layer"
+        Core[AcademiX Core Logic<br/>database.py]:::backend
+        Auth[Security Gateway<br/>3D Portal]:::backend
+        PDF[Export Engine<br/>FPDF & CSV]:::export
+    end
+
+    subgraph "Persistence Layer"
+        DB[(SQLite Database<br/>1,500+ Records)]:::database
+    end
+
+    User -->|Login / Interact| UI
+    UI <--> Auth
+    UI <--> Charts
+    UI <--> Core
+    Core <--> DB
+    UI -->|Generate| PDF
+    PDF -->|Download| User
+```
+
+</div>
+<br>
+
+<div align="center">
   
 | Layer | Technologies Deployed | Purpose & Functionality |
 | :--- | :--- | :--- |
